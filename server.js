@@ -2,7 +2,10 @@ const http = require("http"),
       fs = require("fs"),
       path = require("path"),
       mime = require("mime"),
-      cache = {}
+      cache = {},
+
+      chatServer = require("./lib/chat_server")
+
 
 // HANDLE 404
 const send404 = (response) => {
@@ -53,6 +56,8 @@ const server = http.createServer((request, response) => {
   serveStatic(response, cache, absPath);
 
 });
+// RUN THE CHAT SERVER
+chatServer.listen(server);
 
 // START THE HTTP SERVER
 server.listen(3000, () => {
